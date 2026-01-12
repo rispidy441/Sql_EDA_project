@@ -6,7 +6,7 @@ In this project, i have solved multiple problems with the help of joins, aggrega
 ## Files Included
 1. Sql EDA project.sql (main project).
 2. 11 different table files in csv format(dataset used).
-3. schema_diagram
+3. schema_diagram 
    
 ## Tools Used
    MY SQL
