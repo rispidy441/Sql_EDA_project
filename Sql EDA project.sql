@@ -41,8 +41,8 @@ GROUP BY 1,2,3
 ORDER BY total_spending DESC
 LIMIT 1;
 
-# Question Set 2 - Moderate
-# Q1: Write query to return the email, first name, last name, & Genre of all Rock 
+
+# Q6: Write query to return the email, first name, last name, & Genre of all Rock 
 #    Music listeners. Return your list ordered alphabetically by email starting with A
 # Method 1
  
@@ -70,7 +70,7 @@ ORDER BY email;
 
 
 
-# Q2: Let's invite the artists who have written the most rock music in our dataset. 
+# Q7: Let's invite the artists who have written the most rock music in our dataset. 
 #     Write a query that returns the Artist name and total track count of the top 10 
 #     rock bands
 
@@ -84,7 +84,7 @@ GROUP BY artist.artist_id,2
 ORDER BY number_of_songs DESC
 LIMIT 10;
 
-#Q3: Return all the track names that have a song length longer than the average 
+#Q8: Return all the track names that have a song length longer than the average 
 # song length. Return the Name and Milliseconds for each track. Order by the song 
 # length with the longest songs listed first.
 
@@ -95,16 +95,10 @@ WHERE milliseconds > (
 	FROM track )
 ORDER BY milliseconds DESC;
 
-#Question Set 3 - Advance 
-#Q1: Find how much amount spent by each customer on artists? Write a query to return 
+	
+#Q9: Find how much amount spent by each customer on artists? Write a query to return 
 #customer name, artist name and total spent
-#Steps to Solve: First, find which artist has earned the most according to the 
-#InvoiceLines.Now use this artist to find which customer spent the most on this artist. 
-#For this query, you will need to use the Invoice, InvoiceLine, Track, Customer, Album, 
-#and Artist tables. Note, this one is tricky because the Total spent in the Invoice 
-#table might not be on a single product, so you need to use the InvoiceLine table to 
-#find out how many of each product was purchased, and then multiply this by the price
-#for each artist.
+
 
 WITH best_selling_artist AS (
 	SELECT artist.artist_id AS artist_id, artist.name AS artist_name, SUM(invoice_line.unit_price*invoice_line.quantity) AS total_sales
@@ -127,12 +121,11 @@ JOIN best_selling_artist bsa ON bsa.artist_id = alb.artist_id
 GROUP BY 1,2,3,4
 ORDER BY 5 DESC;
 
-#Q2: We want to find out the most popular music Genre for each country. We determine 
+#Q10: We want to find out the most popular music Genre for each country. We determine 
 #the most popular genre as the genre with the highest amount of purchases. Write a query
  #that returns each country along with the top Genre. For countries where the maximum 
  #number of purchases is shared return all Genres.
-#Steps to Solve:  There are two parts in question- first most popular music genre and 
-#second need data at country level. 
+
 
 #Method 1: Using CTE
 
@@ -177,13 +170,11 @@ JOIN max_genre_per_country ON sales_per_country.country = max_genre_per_country.
 WHERE sales_per_country.purchases_per_genre = max_genre_per_country.max_genre_number;
 
 
-#Q3: Write a query that determines the customer that has spent the most on music for 
+#Q11: Write a query that determines the customer that has spent the most on music for 
 #each country. Write a query that returns the country along with the top customer and 
 #how much they spent. For countries where the top amount spent is shared, provide all 
 #customers who spent this amount
-#Steps to Solve:  Similar to the above question. There are two parts in question- first 
-#find the most spent on music for each country and second filter the data for respective 
-#customers. 
+
 
 #Method 1: using CTE
 WITH Customter_with_country AS (
